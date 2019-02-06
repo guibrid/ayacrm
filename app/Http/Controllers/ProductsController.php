@@ -71,7 +71,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('products/edit')->with('product', $product);
     }
 
     /**
@@ -83,7 +84,22 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->code = $request->input('code');
+        $product->weight = $request->input('weight');
+        $product->cost = $request->input('cost');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
+
+        $product->save();
+        return redirect('/products');
+        
     }
 
     /**
@@ -94,6 +110,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete
+        $product = Product::find($id);
+        $product->delete();
+
+        // redirect
+        return redirect('/products');
     }
 }

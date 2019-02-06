@@ -17,8 +17,12 @@
                             Price : {{$product->price}}TBH<br />
                             Stock : {{$product->stock}}
                     </p>
-                    <!--<a href="#" class="card-link">Edit </a>
-                    <a href="#" class="card-link">Delete</a>-->
+                    
+                    {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
+                        {{ Form::hidden('_method', 'DELETE') }}
+                        <a href="{{ url('products/'.$product->id.'/edit') }}" class="btn btn-primary">Edit</a>
+                        {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
