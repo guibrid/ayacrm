@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/products', 'ProductsController@index');
+//Route::get( '/products/create', 'ProductsController@create');
+//Route::post( '/products/store', 'ProductsController@store');
+
+Route::resources([
+    'products' => 'ProductsController',
+    'orders' => 'OrdersController',
+    'customers' => 'CustomersController'
+]);
