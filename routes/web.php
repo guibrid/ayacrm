@@ -24,3 +24,6 @@ Route::resources([
     'orders' => 'OrdersController',
     'customers' => 'CustomersController'
 ]);
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index');
