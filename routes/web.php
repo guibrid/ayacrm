@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DashboardController@index');
 
 //Route::get('/products', 'ProductsController@index');
 //Route::get( '/products/create', 'ProductsController@create');
@@ -22,8 +20,7 @@ Route::get('/', function () {
 Route::resources([
     'products' => 'ProductsController',
     'orders' => 'OrdersController',
-    'customers' => 'CustomersController'
+    'customers' => 'CustomersController',
+    'dashboard' => 'DashboardController'
 ]);
 Auth::routes();
-
-Route::get('/dashboard', 'DashboardController@index');
