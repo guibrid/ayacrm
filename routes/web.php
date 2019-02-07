@@ -21,6 +21,6 @@ Route::resources([
     'products' => 'ProductsController',
     'orders' => 'OrdersController',
     'customers' => 'CustomersController',
-    'dashboard' => 'DashboardController'
+    'dashboard' => 'DashboardController',
 ]);
 Auth::routes();

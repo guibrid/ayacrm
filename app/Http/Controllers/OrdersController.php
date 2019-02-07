@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
+use App\Product;
+use App\Order;
+use App\Order_product;
 
 class OrdersController extends Controller
 {
@@ -33,7 +37,14 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+        $customers = Customer::pluck('company','id' );
+        $products = Product::pluck('name','id');
+
+        //$order_products = Order_product::pluck('quantity','id');
+
+
+        //return view('products/edit')->with('product', $product);
+        return view('orders/create')->with(compact('customers', 'products'));
     }
 
     /**
@@ -44,7 +55,23 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Save Order
+        $order = new Order;
+        $order->customer_id = $request->input('customer_id');
+        $order->save();
+        
+        // Save each order products
+        for ($i = 0 ; $i < count($request->input('product_id')) - 1 ; $i++) {
+            $order_products = new Order_product;
+            $order_products->quantity = $request->input('quantity')[$i];
+            $order_products->price = $request->input('price')[$i];
+            $order_products->product_id = $request->input('product_id')[$i];
+            $order_products->order_id = $order->id;
+            $order_products->save();
+        }
+
+        return redirect('/dashboard')->with('success', 'your message here'); ;
     }
 
     /**
