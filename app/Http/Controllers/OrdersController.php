@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Customer;
 use App\Product;
 use App\Order;
@@ -69,6 +70,12 @@ class OrdersController extends Controller
             $order_products->product_id = $request->input('product_id')[$i];
             $order_products->order_id = $order->id;
             $order_products->save();
+
+            // Update stock product
+            $product_stock = Product::find($order_products->product_id, ['stock']);
+            DB::table('products')
+                        ->where('id', $request->input('product_id')[$i])
+                        ->update(['stock' => $product_stock->stock - $request->input('quantity')[$i]]);
         }
 
         return redirect('/dashboard')->with('success', 'your message here'); ;
