@@ -24,3 +24,5 @@ Route::resources([
     'dashboard' => 'DashboardController',
 ]);
 Auth::routes();
+
+Route::post( '/getprice', 'ProductsController@getprice'); // Ajax call to get price by product id

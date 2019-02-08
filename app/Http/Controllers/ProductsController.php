@@ -127,4 +127,10 @@ class ProductsController extends Controller
         // redirect
         return redirect('/products');
     }
+
+    public function getprice(Request $request)
+    {
+        $product = Product::find($request->id);
+        return $product->price;
+    }
 }
