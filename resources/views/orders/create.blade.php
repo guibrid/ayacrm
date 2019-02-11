@@ -1,38 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>New order</h1>
 
-{!! Form::open(['action' => 'OrdersController@store', 'method' => 'post']) !!}
-<div class="form-group">
-    {!! Form::label('customer_id', 'Customer') !!}
-    {!! Form::select('customer_id', $customers, null, ['class' => 'form-control', 'id' => 'customer_id']) !!}
-</div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            New order
+        </h1>
+    </section>
+    
+    <!-- Main content -->
+    <section class="content container-fluid">
+        {!! Form::open(['action' => 'OrdersController@store', 'method' => 'post']) !!}
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Quick Example</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
 
-<div id="product-row"></div>
-<!-- Product form rowTemplate -->
-<div id="newlinktpl" style="display:none">
-    <div class="form-row">
-        <div class="form-group col-md-9">
-            {!! Form::select('product_id[]', $products, null, ['class' => 'form-control product_id', 'placeholder' => 'Select product']) !!}
-        </div>
-        <div class="form-group col-md-1">
-            {!! Form::text('quantity[]', null,  ['class' => 'form-control', 'placeholder' => 'Qty']) !!}
-        </div>
-        <div class="form-group col-md-2">
-            {!! Form::text('price[]', null,  ['class' => 'form-control', 'placeholder' => 'Unit price']) !!}
-        </div>
-    </div>
-</div>
-<!-- Product form rowTemplate -->
-<p id="addnew">
-    <a href="javascript:new_link()">Add product </a>
-</p>
+                <div class="box-body">
 
-<div class="form-group">
-    {!! Form::submit('Save order', [ 'class' => 'btn btn-primary']) !!}
-</div>
-{!! Form::close() !!}
+                    <div class="form-group">
+                        {!! Form::label('customer_id', 'Customer') !!}
+                        {!! Form::select('customer_id', $customers, null, ['class' => 'form-control input-lg', 'id' => 'customer_id']) !!}
+                    </div>
+
+                    <div id="product-row"></div>
+
+                    <!-- Product form rowTemplate -->
+                    <div id="newlinktpl" style="display:none">
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                {!! Form::select('product_id[]', $products, null, ['class' => 'form-control product_id input-lg', 'placeholder' => 'Select product']) !!}
+                            </div>
+                            <div class="form-group col-md-1">
+                                {!! Form::text('quantity[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Qty']) !!}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {!! Form::text('price[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Unit price']) !!}
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Product form rowTemplate -->
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <p id="addnew">
+                                <a href="javascript:new_link()" class="btn btn-block btn-success btn-lg">Add product </a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+
+            <div class="form-group">
+                {!! Form::submit('Save order', [ 'class' => 'btn btn-primary btn-lg']) !!}
+            </div>
+            
+        {!! Form::close() !!}
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -84,5 +114,8 @@
 
     });
 </script>
+
+</section>
+<!-- /.content -->
 
 @endsection
