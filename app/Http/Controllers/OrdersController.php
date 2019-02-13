@@ -28,7 +28,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -90,6 +90,21 @@ class OrdersController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Display the all order in a range of dates.
+     *
+     * @param  timestamp  $date1
+     * @param  timestamp  $date2
+     * @return \Illuminate\Http\Response
+     */
+    public function showByDates()
+    {
+        $order_products = Order_product::with('order', 'product')
+                                ->whereDate('order_products.created_at','2019-02-09')
+                                ->get();
+        return view('orders/showbydates')->with('order_products', $order_products);
     }
 
     /**

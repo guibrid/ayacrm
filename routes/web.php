@@ -13,9 +13,8 @@
 
 Route::get('/', 'DashboardController@index');
 
-//Route::get('/products', 'ProductsController@index');
-//Route::get( '/products/create', 'ProductsController@create');
-//Route::post( '/products/store', 'ProductsController@store');
+Route::get( 'orders/showByDates', 'OrdersController@showByDates');
+Route::post( '/getprice', 'ProductsController@getprice'); // Ajax call to get price by product id
 
 Route::resources([
     'products' => 'ProductsController',
@@ -25,4 +24,4 @@ Route::resources([
 ]);
 Auth::routes();
 
-Route::post( '/getprice', 'ProductsController@getprice'); // Ajax call to get price by product id
+

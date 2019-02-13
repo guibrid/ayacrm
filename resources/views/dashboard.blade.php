@@ -12,7 +12,66 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
+            
 
+
+             <!-- Small boxes (Stat box) -->
+      <div class="row">
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>{{ getDailyIncome( '2019-02-09', 'ca' ) }}<sup style="font-size: 20px">฿</sup></h3>
+                  <p>Today's CA</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>{{ getDailyIncome( '2019-02-09', 'benefit' ) }}<sup style="font-size: 20px">฿</sup></h3>
+                  
+                  <p>Today's benefit</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{ getMonthlyIncome(date('Y') ,date('m'), 'ca')  }}<sup style="font-size: 20px">฿</sup></h3>    
+                  <p>Febuary CA</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ getMonthlyIncome(date('Y') ,date('m'), 'benefit')  }}<sup style="font-size: 20px">฿</sup></h3>
+                  <p>Febuary benefits</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
 
         <div class="col-md-4">
             <!-- Widget: user widget style 1 -->
