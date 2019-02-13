@@ -53,7 +53,7 @@ class CustomersController extends Controller
         $customer->company = $request->input('company');
 
         $customer->save();
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success', 'New customer saved!');;
     }
 
     /**

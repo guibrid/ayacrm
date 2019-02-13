@@ -47,7 +47,12 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|string',
+            'code' => 'nullable|string',
+            'weight' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
         ]);
 
         $product = new Product;
@@ -59,7 +64,7 @@ class ProductsController extends Controller
         $product->stock = $request->input('stock');
 
         $product->save();
-        return redirect('/products');
+        return redirect('/products')->with('success', 'New product added!');
     }
 
     /**
@@ -96,7 +101,12 @@ class ProductsController extends Controller
     {
 
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|string',
+            'code' => 'nullable|string',
+            'weight' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
         ]);
 
         $product = Product::find($id);
@@ -108,7 +118,7 @@ class ProductsController extends Controller
         $product->stock = $request->input('stock');
 
         $product->save();
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product updated');
         
     }
 

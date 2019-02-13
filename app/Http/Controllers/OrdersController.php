@@ -41,10 +41,6 @@ class OrdersController extends Controller
         $customers = Customer::pluck('company','id' );
         $products = Product::pluck('name','id');
 
-        //$order_products = Order_product::pluck('quantity','id');
-
-
-        //return view('products/edit')->with('product', $product);
         return view('orders/create')->with(compact('customers', 'products'));
     }
 
@@ -78,7 +74,7 @@ class OrdersController extends Controller
                         ->update(['stock' => $product_stock->stock - $request->input('quantity')[$i]]);
         }
 
-        return redirect('/dashboard')->with('success', 'your message here'); ;
+        return redirect('/dashboard')->with('success', 'New order saved!');
     }
 
     /**

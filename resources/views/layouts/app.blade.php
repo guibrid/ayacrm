@@ -68,6 +68,8 @@ desired effect
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+        <!-- Sidebar -->
+        @include('inc/messages')
         @yield('content')
   </div>
   <!-- /.content-wrapper -->
