@@ -21,7 +21,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>{{ getDailyIncome( '2019-02-09', 'ca' ) }}<sup style="font-size: 20px">฿</sup></h3>
+                  <h3>{{ getDailyIncome( date('Y-m-d'), 'ca' ) }}<sup style="font-size: 20px">฿</sup></h3>
                   <p>Today's CA</p>
                 </div>
                 <div class="icon">
@@ -34,7 +34,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>{{ getDailyIncome( '2019-02-09', 'benefit' ) }}<sup style="font-size: 20px">฿</sup></h3>
+                  <h3>{{ getDailyIncome( date('Y-m-d'), 'benefit' ) }}<sup style="font-size: 20px">฿</sup></h3>
                   
                   <p>Today's benefit</p>
                 </div>
