@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
 
 class CustomersController extends Controller
 {
@@ -33,7 +34,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers/create');
     }
 
     /**
@@ -44,7 +45,15 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'company' => 'required',
+        ]);
+
+        $customer = new Customer;
+        $customer->company = $request->input('company');
+
+        $customer->save();
+        return redirect('/dashboard');
     }
 
     /**

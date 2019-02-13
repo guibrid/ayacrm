@@ -42,6 +42,16 @@
             <li><a href="{{url("/products/create")}}">Add</a></li>
           </ul>
         </li>
+        <li class="treeview">
+            <a href="#"><i class="fa fa-link"></i> <span>Customers</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{url("/customers/create")}}">Add</a></li>
+            </ul>
+          </li>
 
       </ul>
       <!-- /.sidebar-menu -->
