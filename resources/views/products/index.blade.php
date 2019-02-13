@@ -12,43 +12,47 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
-        @if(count($products) >=1)
-            
-            @foreach($products as $product)
 
-                <div class="col-md-4">
-                    <!-- Widget: user widget style 1 -->
-                    <div class="box box-widget widget-user-2">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-light-blue">
-                            <div class="widget-user-image">
-                                <!--<img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">-->
-                            </div>
-                            <!-- /.widget-user-image -->
-                            <h3 class="widget-user-username">{{$product->name}}</h3>
-                            <h5 class="widget-user-desc">{{$product->code}}</h5>
-                        </div>
-                        <div class="box-footer">
-                            <ul class="nav nav-stacked">
-                            <li>Weight : {{$product->weight}}</li>
-                            <li>Cost : {{$product->cost}}TBH</li>
-                            <li>Price : {{$product->price}}TBH</li>
-                            <li>Stock : {{$product->stock}}</li>
-                            </ul>
-                            {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
-                            {{ Form::hidden('_method', 'DELETE') }}
-                            <a href="{{ url('products/'.$product->id.'/edit') }}" class="btn btn-primary">Edit</a>
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                            {{ Form::close() }}
-                        </div>
-                        
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Products list</h3>
                     </div>
-                    <!-- /.widget-user -->
-                </div>
-            
-            @endforeach
+                    <div class="box-body table-responsive no-padding">
 
-        @else
-            <p>No products found</p>
-        @endif
+                        @if(count($products) >=1)
+                                
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Stock</th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach($products as $product)
+
+                                    <tr>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->stock}}</td>
+                                        <td>{{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
+                                            {{ Form::hidden('_method', 'DELETE') }}
+                                            <a href="{{ url('products/'.$product->id.'/edit') }}" class="btn btn-default btn-xs"><i class="fa fa-edit fa-2x"></i></a>
+                                            <!--{{ Form::submit('Del', array('class' => 'btn btn-danger')) }}-->
+                                            {{ Form::close() }}
+                                        </td>
+                                    </tr>
+                                
+                                @endforeach
+
+                            </table>
+
+                        @else
+                            <p>No products found</p>
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+        </div>
 @endsection
