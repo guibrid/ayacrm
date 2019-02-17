@@ -29,6 +29,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{url("/orders/create")}}">Add</a></li>
+              <li><a href="{{url("/orders/showByDates")}}">View orders</a></li>
             </ul>
           </li>
         <li class="treeview">

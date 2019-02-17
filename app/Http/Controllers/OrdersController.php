@@ -91,16 +91,25 @@ class OrdersController extends Controller
     /**
      * Display the all order in a range of dates.
      *
-     * @param  timestamp  $date1
-     * @param  timestamp  $date2
      * @return \Illuminate\Http\Response
      */
     public function showByDates()
     {
+        return view('orders/showbydates');
+    }
+
+    /**
+     * Ajaxcall to Display orders by the date selected.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getOrdersByDate(Request $request)
+    {
         $order_products = Order_product::with('order', 'product')
-                                ->whereDate('order_products.created_at','2019-02-09')
-                                ->get();
-        return view('orders/showbydates')->with('order_products', $order_products);
+                            ->whereDate('order_products.created_at', $request->date)
+                            ->get();
+        return view('orders/getordersbydates')->with('order_products', $order_products);
     }
 
     /**

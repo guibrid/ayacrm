@@ -32,8 +32,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <!-- My css files -->
+  @yield('mycssTop')
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -164,6 +166,8 @@ desired effect
 <script src="{{ asset ("bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset ("bower_components/admin-lte/dist/js/adminlte.min.js") }}"></script>
+<!-- My js files -->
+@yield('myjsBottom')
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

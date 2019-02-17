@@ -15,6 +15,7 @@ Route::get('/', 'DashboardController@index');
 
 Route::get( 'orders/showByDates', 'OrdersController@showByDates');
 Route::post( '/getprice', 'ProductsController@getprice'); // Ajax call to get price by product id
+Route::post( '/getordersbydate', 'OrdersController@getOrdersByDate'); // Ajax call to get price by product id
 
 Route::resources([
     'products' => 'ProductsController',
