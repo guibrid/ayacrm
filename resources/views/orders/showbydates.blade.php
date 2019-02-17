@@ -28,7 +28,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-              <input type="text" class="form-control pull-right" id="datepicker" value="{{ date('Y-m-d')}}" />
+                {!! Form::text('date', date('Y-m-d') ,  ['class' => 'form-control pull-right', 'id' => 'datepicker']) !!}
               </div>
             </div>
           </div>

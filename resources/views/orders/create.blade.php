@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('mycssTop')
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="{{ asset ("/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") }}">
+@endsection
 @section('content')
 
     <!-- Content Header (Page header) -->
@@ -14,12 +17,21 @@
         {!! Form::open(['action' => 'OrdersController@store', 'method' => 'post']) !!}
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Quick Example</h3>
+                    <h3 class="box-title">Add your new order</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
 
                 <div class="box-body">
+
+                    <div class="form-group">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                            </div>
+                            {!! Form::text('date', date('Y-m-d') ,  ['class' => 'form-control pull-right', 'id' => 'datepicker']) !!}
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         {!! Form::label('customer_id', 'Customer') !!}
@@ -118,4 +130,10 @@
 </section>
 <!-- /.content -->
 
+@endsection
+
+@section('myjsBottom')
+  <!-- bootstrap datepicker -->
+  <script src="{{ asset ("/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js") }}"></script>
+  <script src="{{ asset ("/js/orders/create.js") }}"></script>
 @endsection

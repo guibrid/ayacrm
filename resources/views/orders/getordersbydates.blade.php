@@ -27,7 +27,7 @@
                   }
                   $totalPrice = $order_product->quantity*$order_product->price;
                 
-                  echo '<tr><td>'.$order_product->product->name.'</td><td>'.$order_product->quantity.'</td><td>'.$order_product->price.'</td><td>'.$totalPrice.'</td></tr>';
+                  echo '<tr><td>'.$order_product->product->name.'</td><td>'.$order_product->quantity.'</td><td>'.round($order_product->price).'฿</td><td>'.round($totalPrice).'฿</td></tr>';
               }
               ?>
             </tbody>

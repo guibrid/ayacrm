@@ -8,6 +8,7 @@ use App\Customer;
 use App\Product;
 use App\Order;
 use App\Order_product;
+use Carbon\Carbon;
 
 class OrdersController extends Controller
 {
@@ -52,10 +53,12 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         // Save Order
         $order = new Order;
         $order->customer_id = $request->input('customer_id');
+        $order->created_at = $request->input('date').' '.Carbon::now()->format('h:i:s');
+        $order->updated_at = $request->input('date').' '.Carbon::now()->format('h:i:s');
         $order->save();
         
         // Save each order products
@@ -64,6 +67,8 @@ class OrdersController extends Controller
             $order_products->quantity = $request->input('quantity')[$i];
             $order_products->price = $request->input('price')[$i];
             $order_products->product_id = $request->input('product_id')[$i];
+            $order_products->created_at = $request->input('date').' '.Carbon::now()->format('h:i:s');
+            $order_products->updated_at = $request->input('date').' '.Carbon::now()->format('h:i:s');
             $order_products->order_id = $order->id;
             $order_products->save();
 
