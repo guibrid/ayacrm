@@ -65,6 +65,7 @@ class OrdersController extends Controller
         for ($i = 0 ; $i < count($request->input('product_id')) - 1 ; $i++) {
             $order_products = new Order_product;
             $order_products->quantity = $request->input('quantity')[$i];
+            $order_products->cost = getProductCost($request->input('product_id')[$i]);
             $order_products->price = $request->input('price')[$i];
             $order_products->product_id = $request->input('product_id')[$i];
             $order_products->created_at = $request->input('date').' '.Carbon::now()->format('h:i:s');

@@ -1,6 +1,21 @@
 <?php
     use Illuminate\Support\Facades\DB;
     use App\Order_product;
+    use App\Product;
+
+    /**
+     * Get cost of product.
+     *
+     * @param  int  $id 
+     * @return \Illuminate\Http\Response
+     */
+    if (! function_exists('getDailyIncome')) {
+        function getProductCost($id)
+        {
+            $product = Product::find($id);
+            return $product->cost;
+        }
+    }
 
     /**
      * Get the CA or benefit of the day.
