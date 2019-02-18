@@ -4,6 +4,28 @@
     use App\Product;
 
     /**
+     * Get total amount of an order.
+     *
+     * @param  int  $id 
+     * @return \Illuminate\Http\Response
+     */
+    if (! function_exists('getTotalOrder')) {
+        function getTotalOrder($id)
+        {
+            // Get all product sold that $day
+            $datas = Order_product::where('order_id', $id)->get();
+
+            $total = 0;
+            //Calculat the total order amount
+            foreach($datas as $data) {
+                $value = $data->price * $data->quantity;
+                $total += $value;
+            }
+            return round($total);
+        }
+    }
+
+    /**
      * Get cost of product.
      *
      * @param  int  $id 

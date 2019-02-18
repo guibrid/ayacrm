@@ -11,10 +11,10 @@
           <table  class="table table-hover">
             <thead>
               <tr>
-                <th>product</th>
-                <th>quantity</th>
-                <th>Unit price</th>
-                <th>Totalprice</th>
+                <th>Products</th>
+                <th>Quantities</th>
+                <th>Unit prices</th>
+                <th>Total prices</th>
               </tr>
             </thead>
             <tbody>
@@ -22,12 +22,19 @@
               $new_order = '';
               foreach($order_products as $order_product) {
                   if ($new_order <> $order_product->order->id) {
-                      echo '<tr><td colspan="4" style="background-color:#ccc"># '.$order_product->order->id.'</td></tr>';
+                      echo '<tr style="background-color:#ccc">
+                              <td colspan="3"><b># '.$order_product->order->id.'</b></td>
+                              <td><b>'.getTotalOrder($order_product->order->id).'฿</b></td></tr>';
                       $new_order = $order_product->order->id;
                   }
                   $totalPrice = $order_product->quantity*$order_product->price;
                 
-                  echo '<tr><td>'.$order_product->product->name.'</td><td>'.$order_product->quantity.'</td><td>'.round($order_product->price).'฿</td><td>'.round($totalPrice).'฿</td></tr>';
+                  echo '<tr>
+                          <td>'.$order_product->product->name.'</td>
+                          <td>'.$order_product->quantity.'</td>
+                          <td>'.round($order_product->price).'฿</td>
+                          <td>'.round($totalPrice).'฿</td>
+                        </tr>';
               }
               ?>
             </tbody>
