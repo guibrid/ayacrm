@@ -2,6 +2,7 @@
     use Illuminate\Support\Facades\DB;
     use App\Order_product;
     use App\Product;
+    use App\Order;
 
     /**
      * Get total amount of an order.
@@ -22,6 +23,26 @@
                 $total += $value;
             }
             return round($total);
+        }
+    }
+
+    /**
+     * Get customer name by order id
+     *
+     * @param  int  $id order
+     * @return \Illuminate\Http\Response
+     */
+    if (! function_exists('getCustomerByOrder')) {
+        function getCustomerByOrder($id)
+        {
+            // Get customer details
+            $datas = Order::with('customer')->find($id);
+
+            if(!$datas) {
+                return null;
+            }
+
+            return $datas->customer->company;
         }
     }
 

@@ -23,7 +23,7 @@
               foreach($order_products as $order_product) {
                   if ($new_order <> $order_product->order->id) {
                       echo '<tr style="background-color:#ccc">
-                              <td colspan="3"><b># '.$order_product->order->id.'</b></td>
+                              <td colspan="3"><b># '.$order_product->order->id.' - '.getCustomerByOrder($order_product->order->id).'</b></td>
                               <td><b>'.getTotalOrder($order_product->order->id).'฿</b></td></tr>';
                       $new_order = $order_product->order->id;
                   }
