@@ -52,70 +52,68 @@
      * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
-    if (! function_exists('getDailyIncome')) {
+    if (! function_exists('getProductCost')) {
         function getProductCost($id)
         {
             $product = Product::find($id);
             return $product->cost;
         }
     }
+     
+
 
     /**
-     * Get the CA or benefit of the day.
+     * Get the CA of benefit of the month, the day or the year.
      *
-     * @param  string  $type (ca or benefit)
-     * @param  timestamp  $day (year-mo-da)
+     * @param  integer  $month 
+     * @param  integer  $year
+     * @param  integer  $year
      * @return \Illuminate\Http\Response
      */
-
-    if (! function_exists('getDailyIncome')) {
-        function getDailyIncome($day, $type)
+    if (! function_exists('getIncome')) {
+        function getIncome($year, $month= null, $day= null)
         {
-            // Get all product sold that $day
-            $datas = Order_product::with('product')
-                                    ->whereDate('order_products.created_at', $day)
-                                    ->get();
-            $total = 0;
-            //Calculat the total amount for each
-            foreach($datas as $data) {
-                if($type === 'ca') { // If it is a CA type
-                    $value = $data->price * $data->quantity;
-                } else { // If it is a Benefit type
-                    $value = ($data->price * $data->quantity) - ($data->product->cost * $data->quantity);
-                }
-                $total += $value;
-            }
-            return round($total);
-        }
-    }
+            $amountList = [];
+            $CA = 0;
+            $benefit = 0;
 
-    /**
-     * Get the CA of benefit of the month.
-     *
-     * @param  string  $type (ca or benefit)
-     * @param  string  $month 
-     * @param  string  $year
-     * @return \Illuminate\Http\Response
-     */
+            if($day){
+                $datas = Order_product::with('product')
+                ->whereDate('order_products.created_at', $year.'-'.$month.'-'.$day)
+                ->get();
 
-    if (! function_exists('getMonthlyIncome')) {
-        function getMonthlyIncome($year, $month, $type)
-        {
-            // Get all product sold that $day
-            $datas = Order_product::with('product')
-                                    ->whereMonth('order_products.created_at',  $month)
-                                    ->whereYear('order_products.created_at',  $year)
-                                    ->get();
-            $total = 0;
-            //Calculat the total amount for each
-            foreach($datas as $data) {
-                if($type === 'ca') { // If it is a CA type
-                    $value = $data->price * $data->quantity;
-                } else { // If it is a Benefit type
-                    $value = ($data->price * $data->quantity) - ($data->product->cost * $data->quantity);
+                // Loop for each order_products entry
+                foreach($datas as $data) {
+                    $CA += $data->price * $data->quantity; // Total CA of the month
+                    $benefit += ($data->price * $data->quantity) - ($data->cost * $data->quantity); // Total benefits of the month
                 }
-                $total += $value;
+    
+                return ['CA' => round($CA), 'benefit' => round($benefit)];
             }
-            return round($total);
+
+            if ($month && !$day){
+                $datas = Order_product::with('product')
+                                        ->whereMonth('order_products.created_at',  $month)
+                                        ->whereYear('order_products.created_at',  $year)
+                                        ->get();
+                //Calculat the total amount for each day of the month
+                $amountList = range( 0, cal_days_in_month(CAL_GREGORIAN, $month, $year) ); // Create array with each day of the month
+                $amountList = array_fill(1, cal_days_in_month(CAL_GREGORIAN, $month, $year), ['CA' => 0, 'benefit' => 0]); // Set CA and benefits to 0
+                unset($amountList[0]); // Delete the first key 0
+
+                // Loop for each order_products entry
+                foreach($datas as $data) {
+                    $CA += $data->price * $data->quantity; // Total CA of the month
+                    $benefit += ($data->price * $data->quantity) - ($data->cost * $data->quantity); // Total benefits of the month
+                    // CA et Benefits for each days of the month
+                    $dayNbr = ltrim(substr($data->created_at, 8, 2), '0');
+                    $amountList[$dayNbr]['CA'] += $data->price * $data->quantity;
+                    $amountList[$dayNbr]['benefit'] += ($data->price * $data->quantity) - ($data->cost * $data->quantity);
+                } 
+                return ['month' => $month, 'year'=> $year,'CA' => round($CA), 'benefit' => round($benefit), 'details' => $amountList];
+ 
+            }
+
+
         }
     }

@@ -41,11 +41,12 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+                <?php $dayIcome = getIncome(date('Y') ,date('m') ,date('d')); ?>
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                       <div class="inner">
-                        <h3 style="font-size: 30px">{{ getDailyIncome( date('Y-m-d'), 'ca' ) }}<sup style="font-size: 15px">฿</sup></h3>
+                        <h3 style="font-size: 30px">{{ $dayIcome['CA'] }}<sup style="font-size: 15px">฿</sup></h3>
                         <p>Today's CA</p>
                       </div>
                       <div class="icon">
@@ -58,7 +59,7 @@
                     <!-- small box -->
                     <div class="small-box bg-green">
                       <div class="inner">
-                        <h3 style="font-size: 30px">{{ getDailyIncome( date('Y-m-d'), 'benefit' ) }}<sup style="font-size: 15px">฿</sup></h3>
+                        <h3 style="font-size: 30px">{{ $dayIcome['benefit'] }}<sup style="font-size: 15px">฿</sup></h3>
                         
                         <p>Today's benefit</p>
                       </div>
@@ -67,12 +68,13 @@
                       </div>
                     </div>
                   </div>
+                  <?php $monthIcome = getIncome(date('Y') ,date('m')); ?>
                   <!-- ./col -->
                   <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                       <div class="inner">
-                          <h3  style="font-size: 30px">{{ getMonthlyIncome(date('Y') ,date('m'), 'ca')  }}<sup style="font-size: 15px">฿</sup></h3>    
+                          <h3  style="font-size: 30px">{{ $monthIcome['CA'] }}<sup style="font-size: 15px">฿</sup></h3>    
                         <p>Febuary CA</p>
                       </div>
                       <div class="icon">
@@ -85,7 +87,7 @@
                     <!-- small box -->
                     <div class="small-box bg-green">
                       <div class="inner">
-                          <h3 style="font-size: 30px">{{ getMonthlyIncome(date('Y') ,date('m'), 'benefit')  }}<sup style="font-size: 15px">฿</sup></h3>
+                          <h3 style="font-size: 30px">{{ $monthIcome['benefit'] }}<sup style="font-size: 15px">฿</sup></h3>
                         <p>Febuary benefit</p>
                       </div>
                       <div class="icon">
@@ -101,7 +103,38 @@
         </div>
       </div>
 
+      <div class="row">
+          <div class="col-md-12">
+            <!-- AREA CHART -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Income for the current month</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="chart">
+                  <canvas id="areaChart" style="height:250px"></canvas>
+                </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+      </div>
+
     </section>
     <!-- /.content -->
+<?php $toto = $monthIcome['details']; ?>
+@endsection
 
+@section('myjsBottom')
+  <!-- bootstrap datepicker -->
+  <script src="{{ asset ("/bower_components/chart.js/Chart.js") }}"></script>
+  <script type="text/javascript">var monthIncomeDetails = <?php echo json_encode($monthIcome); ?>;</script>
+  <script src="{{ asset ("/js/dashboard.js") }}"></script>
 @endsection
