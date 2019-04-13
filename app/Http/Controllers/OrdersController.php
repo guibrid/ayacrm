@@ -40,7 +40,8 @@ class OrdersController extends Controller
     public function create()
     {
         $customers = Customer::pluck('company','id' );
-        $products = Product::pluck('name','id');
+        $products = Product::orderBy('name', 'ASC')->get();
+        $products = $products->pluck('name','id');
 
         return view('orders/create')->with(compact('customers', 'products'));
     }
