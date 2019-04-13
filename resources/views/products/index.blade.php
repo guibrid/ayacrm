@@ -25,6 +25,7 @@
                                 
                             <table class="table table-hover">
                                 <tr>
+                                    <th></th>
                                     <th>Name</th>
                                     <th>Stock</th>
                                     <th></th>
@@ -33,6 +34,13 @@
                                 @foreach($products as $product)
 
                                     <tr>
+                                        <td>
+                                            @if ($product->img)
+                                                {{ Html::image('img/products/'.$product->img, $product->name,['height'=>'100','width'=>'100']) }}
+                                                @else
+                                                {{ Html::image('img/products/nopics.gif', 'no picture available',['height'=>'100','width'=>'100']) }}
+                                            @endif
+                                        </td>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->stock}}</td>
                                         <td>{{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
