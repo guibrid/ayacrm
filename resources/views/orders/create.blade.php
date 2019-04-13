@@ -43,10 +43,13 @@
                     <!-- Product form rowTemplate -->
                     <div id="newlinktpl" style="display:none">
                         <div class="form-row">
-                            <div class="form-group col-md-9">
+                            <div class="form-group col-md-1 imgProduct">
+                                
+                            </div>
+                            <div class="form-group col-md-7">
                                 {!! Form::select('product_id[]', $products, null, ['class' => 'form-control product_id input-lg', 'placeholder' => 'Select product']) !!}
                             </div>
-                            <div class="form-group col-md-1">
+                            <div class="form-group col-md-2">
                                 {!! Form::text('quantity[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Qty']) !!}
                             </div>
                             <div class="form-group col-md-2">
@@ -92,7 +95,7 @@
         var div1 = document.createElement('div');
         div1.id = ct;
         // link to delete extended form elements
-        var delLink = '<a href="javascript:delIt('+ ct +')">Delele product</a><hr />';
+        var delLink = '<a href="javascript:delIt('+ ct +')" style="display:inline-block; margin-left: 20px">Delele product</a><hr />';
         div1.innerHTML = document.getElementById('newlinktpl').innerHTML + delLink;
         document.getElementById('product-row').appendChild(div1);
     }
@@ -108,7 +111,10 @@
     $(document).on('change', 'select[name="product_id[]"]', function () {
         //$(this).closest('.form-row').find('input[name="price[]"]').val($(this).val());
         priceInput = $(this).closest('.form-row').find('input[name="price[]"]'); // Get the right price input
+        qtyInput = $(this).closest('.form-row').find('input[name="quantity[]"]'); // Get the right price input
+        imgDiv = $(this).closest('.form-row').find('.imgProduct');
         productId = $(this).val() // Product id value
+
 
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -121,6 +127,18 @@
 
             success:function(data){
                 priceInput.val(data);
+                qtyInput.val(1);
+            }
+        });
+
+        $.ajax({
+            type: 'post',
+            url:"{{ url('/getimg') }}",
+            data: {id:productId},
+
+            success:function(data){
+                img = '<img src="{{asset("img/products")}}/'+data+'" width="100" height="100" />';
+                imgDiv.append(img);
             }
         });
 

@@ -143,4 +143,10 @@ class ProductsController extends Controller
         $product = Product::find($request->id);
         return $product->price;
     }
+
+    public function getimg(Request $request)
+    {
+        $product = Product::find($request->id);
+        return $product->img;
+    }
 }
