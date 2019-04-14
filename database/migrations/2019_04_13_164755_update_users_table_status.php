@@ -14,7 +14,7 @@ class UpdateUsersTableStatus extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->int('status')->after('email');
+            $table->integer('status')->after('email');
         });
     }
 
