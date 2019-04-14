@@ -32,6 +32,7 @@
               <li><a href="{{url("/orders/showByDates")}}">View orders</a></li>
             </ul>
           </li>
+          @if(Auth::user()->isAdmin())
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Products</span>
             <span class="pull-right-container">
@@ -53,7 +54,7 @@
               <li><a href="{{url("/customers/create")}}">Add</a></li>
             </ul>
           </li>
-
+          @endif
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -20,12 +20,14 @@
                   <a class="btn btn-app" href="{{url("/orders/create")}}">
                     <i class="fa fa-edit"></i> Add order
                   </a>
+                  @if(Auth::user()->isAdmin())
                   <a class="btn btn-app" href="{{url("/customers/create")}}">
                     <i class="fa fa-edit"></i> Add customer
                   </a>
                   <a class="btn btn-app" href="{{url("/products/create")}}">
                     <i class="fa fa-edit"></i> Add product
                   </a>
+                  @endif
               <!-- /.box-body -->
             </div>
           <!-- /.box -->
@@ -54,6 +56,7 @@
                       </div>
                     </div>
                   </div>
+                  @if(Auth::user()->isAdmin())
                   <!-- ./col -->
                   <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
@@ -95,6 +98,7 @@
                       </div>
                     </div>
                   </div>
+                  @endif
                   <!-- ./col -->
                 <!-- /.box-body -->
               </div>
@@ -103,6 +107,7 @@
         </div>
       </div>
 
+      @if(Auth::user()->isAdmin())
       <div class="row">
           <div class="col-md-12">
             <!-- AREA CHART -->
@@ -126,15 +131,18 @@
             <!-- /.box -->
           </div>
       </div>
+      @endif
 
     </section>
     <!-- /.content -->
-<?php $toto = $monthIcome['details']; ?>
+
 @endsection
 
 @section('myjsBottom')
   <!-- bootstrap datepicker -->
+  @if(Auth::user()->isAdmin())
   <script src="{{ asset ("/bower_components/chart.js/Chart.js") }}"></script>
   <script type="text/javascript">var monthIncomeDetails = <?php echo json_encode($monthIcome); ?>;</script>
+  @endif
   <script src="{{ asset ("/js/dashboard.js") }}"></script>
 @endsection

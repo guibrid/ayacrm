@@ -34,8 +34,12 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('customer_id', 'Customer') !!}
-                        {!! Form::select('customer_id', $customers, null, ['class' => 'form-control input-lg', 'id' => 'customer_id']) !!}
+                        @if(Auth::user()->isAdmin())
+                            {!! Form::label('customer_id', 'Customer') !!}
+                            {!! Form::select('customer_id', $customers, null, ['class' => 'form-control input-lg', 'id' => 'customer_id']) !!}
+                        @else
+                            {!! Form::hidden('customer_id', 1) !!}
+                        @endif
                     </div>
 
                     <div id="product-row"></div>
@@ -53,7 +57,11 @@
                                 {!! Form::text('quantity[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Qty']) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::text('price[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Unit price']) !!}
+                                @if(Auth::user()->isAdmin())
+                                    {!! Form::text('price[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Unit price']) !!}
+                                @else
+                                    {!! Form::text('price[]', null,  ['class' => 'form-control input-lg', 'placeholder' => 'Unit price', 'readonly' => true]) !!}
+                                @endif
                             </div>
 
                         </div>
