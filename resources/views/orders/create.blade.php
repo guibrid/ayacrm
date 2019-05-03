@@ -118,6 +118,7 @@
 
     $(document).on('change', 'select[name="product_id[]"]', function () {
         //$(this).closest('.form-row').find('input[name="price[]"]').val($(this).val());
+        $(this).closest('.form-row').find('.product-image').remove();
         priceInput = $(this).closest('.form-row').find('input[name="price[]"]'); // Get the right price input
         qtyInput = $(this).closest('.form-row').find('input[name="quantity[]"]'); // Get the right price input
         imgDiv = $(this).closest('.form-row').find('.imgProduct');
@@ -145,7 +146,7 @@
             data: {id:productId},
 
             success:function(data){
-                img = '<img src="{{asset("img/products")}}/'+data+'" width="100" height="100" />';
+                img = '<img src="{{asset("img/products")}}/'+data+'" width="100" height="100" class="product-image" />';
                 imgDiv.append(img);
             }
         });

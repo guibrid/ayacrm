@@ -24,7 +24,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('name', 'asc')->get();
         return view('products/index')->with('products', $products);
     }
 
@@ -147,6 +147,9 @@ class ProductsController extends Controller
     public function getimg(Request $request)
     {
         $product = Product::find($request->id);
+        if (is_null($product->img)){
+            $product->img = 'nopics.gif';
+        }
         return $product->img;
     }
 }
